@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer &amp; Publishing Guide — Rahmani International</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; color: #0f172a; background: #f8fafc; padding: 2rem 1rem; }
+    @media (prefers-color-scheme: dark) {
+      body { color: #f1f5f9; background: #060a14; }
+      main { background: #0f172a; border-color: rgba(148,163,184,.2); }
+      code { background: #1e293b; }
+    }
+    main { max-width: 760px; margin: 0 auto; background: #ffffff; border: 1px solid rgba(15, 23, 42, 0.1); border-radius: 16px; padding: 2rem; }
+    h1 { margin-top: 0; font-size: 1.75rem; }
+    h2 { margin-top: 1.75rem; font-size: 1.2rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; padding: 0.15rem 0.4rem; border-radius: 6px; background: #f1f5f9; }
+    a { color: #1a56db; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="/">← Back to Rahmani International</a></p>
+    <h1>GitHub &amp; Vercel Static Asset Guide</h1>
+    <p>This standalone HTML document demonstrates direct static file hosting inside <code>public/files/developer-guide.html</code>.</p>
+    <h2>1. Updating the Company Logo</h2>
+    <p>Upload or overwrite <code>public/brand/logo.png</code> in GitHub. Push or commit to your main branch and Vercel automatically redeploys with the updated logo across all pages.</p>
+    <h2>2. Adding a Privacy Policy</h2>
+    <p>Upload any HTML or TXT file under <code>public/privacy-policy/&lt;app-slug&gt;/</code>. For example:</p>
+    <ul>
+      <li><code>public/privacy-policy/multi-tool-app/index.html</code> → <code>/privacy-policy/multi-tool-app/index.html</code></li>
+      <li><code>public/privacy-policy/another-app/policy.txt</code> → <code>/privacy-policy/another-app/policy.txt</code></li>
+    </ul>
+    <h2>3. Publishing Downloadable Files</h2>
+    <p>Place PDF, TXT, JSON, HTML, or image assets inside <code>public/files/</code>. Directory structure and filenames are preserved automatically on Vercel.</p>
+    <p style="margin-top:2rem;font-size:.9rem;opacity:.8">Rahmani International · Support: <a href="mailto:info@rahmaniinternational.in">info@rahmaniinternational.in</a></p>
+  </main>
+</body>
+</html>

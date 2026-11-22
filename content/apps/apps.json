@@ -1,0 +1,114 @@
+[
+  {
+    "id": "multitool",
+    "slug": "multi-tool-app",
+    "name": "Multi Tool App",
+    "category": "Tools",
+    "categoryLabel": "Tools / Productivity",
+    "logo": "https://imagizer.imageshack.com/img921/3959/KHS5JG.png",
+    "accentHex": "#1a56db",
+    "badge": "10+ Utilities",
+    "description": "An all-in-one utility app that brings multiple useful everyday tools together in one convenient place.",
+    "features": [
+      "QR Code Generator",
+      "Image to PDF",
+      "Internet Speed Test",
+      "Calculator",
+      "Unit Converter",
+      "Image Compressor",
+      "Secure Notes",
+      "Word Counter",
+      "Percentage Calculator",
+      "Stopwatch"
+    ],
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=com.app.qrgeneratoranas",
+    "packageId": "com.app.qrgeneratoranas",
+    "privacyPolicyPath": "/privacy-policy/multi-tool-app/index.html"
+  },
+  {
+    "id": "swarx",
+    "slug": "swarx",
+    "name": "SwarX",
+    "category": "Music",
+    "categoryLabel": "Music / Entertainment",
+    "logo": "https://imagizer.imageshack.com/img923/6545/M2VYVG.png",
+    "accentHex": "#0284c7",
+    "badge": "Featured App",
+    "featuredSpotlight": true,
+    "description": "A modern music application designed for listening to music online and offline, with a feature-rich listening experience.",
+    "features": [
+      "Online Music",
+      "Offline Music",
+      "Modern Player",
+      "Music Library",
+      "Feature-rich experience"
+    ],
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=com.musicxanas",
+    "packageId": "com.musicxanas",
+    "privacyPolicyPath": "/privacy-policy/swarx/index.html"
+  },
+  {
+    "id": "wadirect",
+    "slug": "wa-direct-chat",
+    "name": "WA Direct Chat",
+    "category": "Communication",
+    "categoryLabel": "Communication / Tools",
+    "logo": "https://imagizer.imageshack.com/img924/2933/vWHFOF.png",
+    "accentHex": "#0f766e",
+    "description": "A collection of useful messaging utilities including direct chat tools, stylish fonts and text-related features.",
+    "features": [
+      "Direct Chat",
+      "300+ Stylish Fonts",
+      "Text Repeater",
+      "Text Styling",
+      "QR Tools",
+      "Messaging Utilities"
+    ],
+    "note": "This is an independent utility app and is not affiliated with, endorsed by or associated with WhatsApp.",
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=com.app.waanas",
+    "packageId": "com.app.waanas",
+    "privacyPolicyPath": "/privacy-policy/wa-direct-chat/index.html"
+  },
+  {
+    "id": "sarkari",
+    "slug": "sarkari-yojana-calculator",
+    "name": "Sarkari Yojana Calculator",
+    "category": "Finance",
+    "categoryLabel": "Finance / Calculator",
+    "logo": "https://imagizer.imageshack.com/img924/6601/s0r2pU.jpg",
+    "accentHex": "#b45309",
+    "description": "A practical calculator app for estimating returns and calculations related to savings and government-backed schemes.",
+    "features": [
+      "PPF Calculator",
+      "FD Calculator",
+      "RD Calculator",
+      "Sukanya Samriddhi Yojana Calculator",
+      "Senior Citizen Savings Scheme Calculator",
+      "Other savings calculators"
+    ],
+    "note": "The app is an independent informational calculator and is not affiliated with or endorsed by any government organization. Results are estimates and should be independently verified.",
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=com.app.sarkarianas",
+    "packageId": "com.app.sarkarianas",
+    "privacyPolicyPath": "/privacy-policy/sarkari-yojana-calculator/index.html"
+  },
+  {
+    "id": "booyah",
+    "slug": "booyah-challenge",
+    "name": "Booyah Challenge",
+    "category": "Gaming",
+    "categoryLabel": "Gaming / Tournament",
+    "logo": "https://imagizer.imageshack.com/img924/9842/41VGAg.jpg",
+    "accentHex": "#be123c",
+    "description": "A tournament-focused gaming platform designed for competitive gaming experiences.",
+    "features": [
+      "Tournament participation",
+      "Competitive gaming",
+      "Match-based challenges",
+      "Gaming-focused experience"
+    ],
+    "note": "Participate in eligible tournaments and compete for available rewards. Availability of tournaments and rewards may vary.",
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=anasbooyah.com",
+    "packageId": "anasbooyah.com",
+    "privacyPolicyPath": "/privacy-policy/booyah-challenge/index.html"
+  }
+]

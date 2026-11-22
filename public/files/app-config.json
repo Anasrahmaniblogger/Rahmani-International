@@ -1,0 +1,49 @@
+{
+  "company": "Rahmani International",
+  "domain": "https://rahmaniinternational.in",
+  "owner": "Anas Rahmani",
+  "supportEmail": "info@rahmaniinternational.in",
+  "developerProfile": "https://play.google.com/store/apps/dev?id=5231589266899006682",
+  "apps": [
+    {
+      "id": "multitool",
+      "name": "Multi Tool App",
+      "packageId": "com.app.qrgeneratoranas",
+      "category": "Tools / Productivity",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.app.qrgeneratoranas",
+      "privacyPolicyUrl": "https://rahmaniinternational.in/privacy-policy/multi-tool-app/index.html"
+    },
+    {
+      "id": "swarx",
+      "name": "SwarX",
+      "packageId": "com.musicxanas",
+      "category": "Music / Entertainment",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.musicxanas",
+      "privacyPolicyUrl": "https://rahmaniinternational.in/privacy-policy/swarx/index.html"
+    },
+    {
+      "id": "wadirect",
+      "name": "WA Direct Chat",
+      "packageId": "com.app.waanas",
+      "category": "Communication / Tools",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.app.waanas",
+      "privacyPolicyUrl": "https://rahmaniinternational.in/privacy-policy/wa-direct-chat/index.html"
+    },
+    {
+      "id": "sarkari",
+      "name": "Sarkari Yojana Calculator",
+      "packageId": "com.app.sarkarianas",
+      "category": "Finance / Calculator",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.app.sarkarianas",
+      "privacyPolicyUrl": "https://rahmaniinternational.in/privacy-policy/sarkari-yojana-calculator/index.html"
+    },
+    {
+      "id": "booyah",
+      "name": "Booyah Challenge",
+      "packageId": "anasbooyah.com",
+      "category": "Gaming / Tournament",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=anasbooyah.com",
+      "privacyPolicyUrl": "https://rahmaniinternational.in/privacy-policy/booyah-challenge/index.html"
+    }
+  ]
+}

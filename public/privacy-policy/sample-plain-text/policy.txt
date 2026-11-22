@@ -1,0 +1,23 @@
+RAHMANI INTERNATIONAL — PLAIN-TEXT PRIVACY POLICY SAMPLE
+========================================================
+
+File Path in GitHub:
+  public/privacy-policy/sample-plain-text/policy.txt
+
+Public HTTPS URL:
+  https://rahmaniinternational.in/privacy-policy/sample-plain-text/policy.txt
+
+Purpose:
+  Demonstrates direct plain-text (.txt) privacy policy hosting without altering
+  file contents or requiring login. You can upload any .txt or .html policy file
+  under public/privacy-policy/<app-name>/ and commit to GitHub to publish it.
+
+Publisher Confirmation Required:
+  Do not use this sample file directly for Google Play Console submissions.
+  Confirm actual data collection, device permissions, analytics, advertising,
+  and third-party SDKs for your specific application before publishing.
+
+Contact:
+  Rahmani International
+  Support Email: info@rahmaniinternational.in
+  Website: https://rahmaniinternational.in

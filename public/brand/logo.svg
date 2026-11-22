@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Rahmani International monogram">
+  <defs>
+    <linearGradient id="ri-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a56db" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#ri-grad)" />
+  <rect x="10" y="10" width="108" height="108" rx="20" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" />
+  <path d="M36 92V36h25c13.5 0 21.5 6.8 21.5 17.8 0 8.2-4.6 14-12.5 16.4L84 92H70.2L57.8 72H48v20H36zm12-30.2h12.2c6.4 0 10.2-3 10.2-8.2s-3.8-8.2-10.2-8.2H48v16.4z" fill="#ffffff" />
+  <rect x="88" y="36" width="11" height="56" rx="4" fill="#bae6fd" />
+</svg>

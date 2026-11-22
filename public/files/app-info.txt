@@ -1,0 +1,37 @@
+RAHMANI INTERNATIONAL — PUBLISHED APPLICATIONS SUMMARY
+======================================================
+
+Website:  https://rahmaniinternational.in
+Owner:    Anas Rahmani
+Support:  info@rahmaniinternational.in
+Play Dev: https://play.google.com/store/apps/dev?id=5231589266899006682
+
+1. Multi Tool App
+   Category: Tools / Productivity
+   Package:  com.app.qrgeneratoranas
+   Store:    https://play.google.com/store/apps/details?id=com.app.qrgeneratoranas
+   Policy:   https://rahmaniinternational.in/privacy-policy/multi-tool-app/index.html
+
+2. SwarX
+   Category: Music / Entertainment
+   Package:  com.musicxanas
+   Store:    https://play.google.com/store/apps/details?id=com.musicxanas
+   Policy:   https://rahmaniinternational.in/privacy-policy/swarx/index.html
+
+3. WA Direct Chat
+   Category: Communication / Tools
+   Package:  com.app.waanas
+   Store:    https://play.google.com/store/apps/details?id=com.app.waanas
+   Policy:   https://rahmaniinternational.in/privacy-policy/wa-direct-chat/index.html
+
+4. Sarkari Yojana Calculator
+   Category: Finance / Calculator
+   Package:  com.app.sarkarianas
+   Store:    https://play.google.com/store/apps/details?id=com.app.sarkarianas
+   Policy:   https://rahmaniinternational.in/privacy-policy/sarkari-yojana-calculator/index.html
+
+5. Booyah Challenge
+   Category: Gaming / Tournament
+   Package:  anasbooyah.com
+   Store:    https://play.google.com/store/apps/details?id=anasbooyah.com
+   Policy:   https://rahmaniinternational.in/privacy-policy/booyah-challenge/index.html
