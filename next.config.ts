@@ -41,6 +41,10 @@ const nextConfig: NextConfig = {
     ];
   },
   output: 'standalone',
+  outputFileTracingIncludes: {
+    '/policies/**': ['./public/policies/**', './public/privacy-policy/**'],
+    '/privacy-policy/**': ['./public/privacy-policy/**', './public/policies/**'],
+  },
   transpilePackages: ['motion'],
   webpack: (config, { dev }) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.
