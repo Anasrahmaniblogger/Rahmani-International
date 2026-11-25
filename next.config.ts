@@ -40,10 +40,30 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/public/privacy-policy/:path+',
+        destination: '/privacy-policy/:path+',
+      },
+      {
+        source: '/public/policies/:path+',
+        destination: '/policies/:path+',
+      },
+    ];
+  },
   output: 'standalone',
   outputFileTracingIncludes: {
+    '/policies/[...slug]': ['./public/policies/**', './public/privacy-policy/**'],
     '/policies/**': ['./public/policies/**', './public/privacy-policy/**'],
-    '/privacy-policy/**': ['./public/privacy-policy/**', './public/policies/**'],
+    '/privacy-policy/[...slug]': [
+      './public/privacy-policy/**',
+      './public/policies/**',
+    ],
+    '/privacy-policy/**': [
+      './public/privacy-policy/**',
+      './public/policies/**',
+    ],
   },
   transpilePackages: ['motion'],
   webpack: (config, { dev }) => {

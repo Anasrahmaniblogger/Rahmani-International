@@ -146,6 +146,56 @@ function createScreenCanvasTexture(
   return texture;
 }
 
+function isSafeScreenshotUrl(url: string): boolean {
+  const trimmed = url.trim();
+  if (!trimmed) return false;
+  if (trimmed.startsWith('/') && !trimmed.startsWith('//')) return true;
+  return /^https:\/\//i.test(trimmed);
+}
+
+function createScreenshotCanvasTexture(
+  img: HTMLImageElement,
+  isDark: boolean,
+  maxAnisotropy: number
+): THREE.CanvasTexture {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512;
+  canvas.height = 1024;
+  const ctx = canvas.getContext('2d');
+
+  if (ctx) {
+    ctx.fillStyle = isDark ? '#090d16' : '#f8fafc';
+    ctx.fillRect(0, 0, 512, 1024);
+
+    const imgW = img.naturalWidth || 512;
+    const imgH = img.naturalHeight || 1024;
+    const scale = Math.max(512 / imgW, 1024 / imgH);
+    const drawW = imgW * scale;
+    const drawH = imgH * scale;
+    const dx = (512 - drawW) / 2;
+    const dy = (1024 - drawH) / 2;
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(img, dx, dy, drawW, drawH);
+
+    // Subtle top bezel vignette so the 3D earpiece speaker stays crisp
+    const topVignette = ctx.createLinearGradient(0, 0, 0, 56);
+    topVignette.addColorStop(0, 'rgba(2, 6, 23, 0.34)');
+    topVignette.addColorStop(1, 'rgba(2, 6, 23, 0)');
+    ctx.fillStyle = topVignette;
+    ctx.fillRect(0, 0, 512, 56);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = maxAnisotropy;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.needsUpdate = true;
+  return texture;
+}
+
 function createCircuitCoreTexture(maxAnisotropy: number): THREE.CanvasTexture {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
@@ -635,6 +685,53 @@ export function HeroThreeScene() {
     const clock = new THREE.Clock();
     let frameId = 0;
     let disposed = false;
+    let textureRequestId = 0;
+
+    function swapScreenTexture(
+      nextTex: THREE.CanvasTexture,
+      emissiveIntensity: number
+    ) {
+      screenMat.map = nextTex;
+      screenMat.emissiveMap = nextTex;
+      screenMat.emissiveIntensity = emissiveIntensity;
+      screenMat.needsUpdate = true;
+      currentScreenTex.dispose();
+      currentScreenTex = nextTex;
+    }
+
+    function updateAppScreen(appIndex: number, isDark: boolean) {
+      const reqId = ++textureRequestId;
+      const fallbackTex = createScreenCanvasTexture(appIndex, isDark, maxAniso);
+      swapScreenTexture(fallbackTex, 0.28);
+
+      const app = APPS_PORTFOLIO[appIndex] ?? APPS_PORTFOLIO[0];
+      const screenshotUrl = app?.screenshot?.trim() ?? '';
+      if (!isSafeScreenshotUrl(screenshotUrl)) {
+        return;
+      }
+
+      const img = new window.Image();
+      if (/^https:\/\//i.test(screenshotUrl)) {
+        img.crossOrigin = 'anonymous';
+      }
+      img.referrerPolicy = 'no-referrer';
+      img.onload = () => {
+        if (disposed || reqId !== textureRequestId) return;
+        try {
+          const shotTex = createScreenshotCanvasTexture(img, isDark, maxAniso);
+          swapScreenTexture(shotTex, 0.16);
+        } catch {
+          // Keep procedural app preview if canvas readback fails
+        }
+      };
+      img.onerror = () => {
+        // Silently keep procedural app preview when screenshot fails to load
+      };
+      img.src = screenshotUrl;
+    }
+
+    // Load real app screenshot immediately on mount if configured for initial app
+    updateAppScreen(renderedAppIdx, renderedDark);
 
     function afterDraw(cb: () => void) {
       const gl = renderer.getContext() as WebGL2RenderingContext;
@@ -658,6 +755,8 @@ export function HeroThreeScene() {
     }
 
     function syncVisualState(dt: number, elapsed: number) {
+      let screenNeedsRefresh = false;
+
       if (renderedDark !== stateRef.current.isDark) {
         renderedDark = stateRef.current.isDark;
         const bgHex = renderedDark ? 0x091022 : 0xeef3fb;
@@ -666,31 +765,16 @@ export function HeroThreeScene() {
           scene.fog.color.setHex(bgHex);
         }
         plinthMat.color.setHex(renderedDark ? 0x162036 : 0xe2e8f0);
-
-        const nextTex = createScreenCanvasTexture(
-          stateRef.current.appIdx,
-          renderedDark,
-          maxAniso
-        );
-        screenMat.map = nextTex;
-        screenMat.emissiveMap = nextTex;
-        screenMat.needsUpdate = true;
-        currentScreenTex.dispose();
-        currentScreenTex = nextTex;
+        screenNeedsRefresh = true;
       }
 
       if (renderedAppIdx !== stateRef.current.appIdx) {
         renderedAppIdx = stateRef.current.appIdx;
-        const nextTex = createScreenCanvasTexture(
-          renderedAppIdx,
-          renderedDark,
-          maxAniso
-        );
-        screenMat.map = nextTex;
-        screenMat.emissiveMap = nextTex;
-        screenMat.needsUpdate = true;
-        currentScreenTex.dispose();
-        currentScreenTex = nextTex;
+        screenNeedsRefresh = true;
+      }
+
+      if (screenNeedsRefresh) {
+        updateAppScreen(renderedAppIdx, renderedDark);
       }
 
       const targetExplode = stateRef.current.exploded ? 1 : 0;

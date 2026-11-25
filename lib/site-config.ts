@@ -7,6 +7,7 @@ export interface AppProduct {
   category: string;
   categoryLabel: string;
   logo: string;
+  screenshot?: string;
   accentHex: string;
   badge?: string;
   featuredSpotlight?: boolean;

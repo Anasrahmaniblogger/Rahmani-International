@@ -6,6 +6,7 @@
     "category": "Tools",
     "categoryLabel": "Tools / Productivity",
     "logo": "https://imagizer.imageshack.com/img921/3959/KHS5JG.png",
+    "screenshot": "",
     "accentHex": "#1a56db",
     "badge": "10+ Utilities",
     "description": "An all-in-one utility app that brings multiple useful everyday tools together in one convenient place.",
@@ -32,6 +33,7 @@
     "category": "Music",
     "categoryLabel": "Music / Entertainment",
     "logo": "https://imagizer.imageshack.com/img923/6545/M2VYVG.png",
+    "screenshot": "",
     "accentHex": "#0284c7",
     "badge": "Featured App",
     "featuredSpotlight": true,
@@ -54,6 +56,7 @@
     "category": "Communication",
     "categoryLabel": "Communication / Tools",
     "logo": "https://imagizer.imageshack.com/img924/2933/vWHFOF.png",
+    "screenshot": "",
     "accentHex": "#0f766e",
     "description": "A collection of useful messaging utilities including direct chat tools, stylish fonts and text-related features.",
     "features": [
@@ -76,6 +79,7 @@
     "category": "Finance",
     "categoryLabel": "Finance / Calculator",
     "logo": "https://imagizer.imageshack.com/img924/6601/s0r2pU.jpg",
+    "screenshot": "",
     "accentHex": "#b45309",
     "description": "A practical calculator app for estimating returns and calculations related to savings and government-backed schemes.",
     "features": [
@@ -98,6 +102,7 @@
     "category": "Gaming",
     "categoryLabel": "Gaming / Tournament",
     "logo": "https://imagizer.imageshack.com/img924/9842/41VGAg.jpg",
+    "screenshot": "",
     "accentHex": "#be123c",
     "description": "A tournament-focused gaming platform designed for competitive gaming experiences.",
     "features": [

@@ -31,6 +31,17 @@ function isValidSegment(segment: string): boolean {
   return true;
 }
 
+function normalizeSlug(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[+\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function compactSlug(value: string): string {
+  return value.toLowerCase().replace(/[+\s_-]+/g, '');
+}
+
 function isInsideRoot(candidate: string, root: string): boolean {
   const normalizedRoot = path.resolve(root);
   const normalizedCandidate = path.resolve(candidate);
@@ -38,6 +49,42 @@ function isInsideRoot(candidate: string, root: string): boolean {
     normalizedCandidate === normalizedRoot ||
     normalizedCandidate.startsWith(`${normalizedRoot}${path.sep}`)
   );
+}
+
+function findMatchingEntry(entries: string[], segment: string): string | undefined {
+  const visible = entries.filter((entry) => !entry.startsWith('.'));
+
+  // 1. Exact match
+  const exact = visible.find((entry) => entry === segment);
+  if (exact) return exact;
+
+  // 2. Case-insensitive match (e.g., "swarx" -> "SwarX")
+  const lowerSegment = segment.toLowerCase();
+  const caseInsensitive = visible.find(
+    (entry) => entry.toLowerCase() === lowerSegment
+  );
+  if (caseInsensitive) return caseInsensitive;
+
+  // 3. Space / hyphen / underscore / plus normalized match
+  //    (e.g., "booyah-challenge" or "Booyah+Challenge" -> "Booyah Challenge")
+  const normalizedSegment = normalizeSlug(segment);
+  if (normalizedSegment) {
+    const normalizedMatch = visible.find(
+      (entry) => normalizeSlug(entry) === normalizedSegment
+    );
+    if (normalizedMatch) return normalizedMatch;
+  }
+
+  // 4. Compact match without separators (e.g., "swar-x" -> "SwarX")
+  const compactedSegment = compactSlug(segment);
+  if (compactedSegment) {
+    const compactMatch = visible.find(
+      (entry) => compactSlug(entry) === compactedSegment
+    );
+    if (compactMatch) return compactMatch;
+  }
+
+  return undefined;
 }
 
 async function resolveFileInsideRoot(
@@ -49,9 +96,11 @@ async function resolveFileInsideRoot(
   }
 
   let currentPath = path.resolve(rootDir);
+  let realRoot: string;
   try {
     const rootStat = await fs.stat(currentPath);
     if (!rootStat.isDirectory()) return null;
+    realRoot = await fs.realpath(currentPath);
   } catch {
     return null;
   }
@@ -64,15 +113,7 @@ async function resolveFileInsideRoot(
       return null;
     }
 
-    const exactMatch = entries.find((entry) => entry === segment);
-    const matched =
-      exactMatch ??
-      entries.find(
-        (entry) =>
-          !entry.startsWith('.') &&
-          entry.toLowerCase() === segment.toLowerCase()
-      );
-
+    const matched = findMatchingEntry(entries, segment);
     if (!matched) {
       return null;
     }
@@ -116,6 +157,13 @@ async function resolveFileInsideRoot(
     }
 
     if (!targetFile) {
+      const txtFiles = visibleEntries.filter((name) => /\.txt$/i.test(name));
+      if (txtFiles.length === 1) {
+        targetFile = txtFiles[0];
+      }
+    }
+
+    if (!targetFile) {
       return null;
     }
 
@@ -125,9 +173,13 @@ async function resolveFileInsideRoot(
     }
 
     try {
-      const indexStat = await fs.stat(resolvedIndex);
+      const realResolved = await fs.realpath(resolvedIndex);
+      if (!isInsideRoot(realResolved, realRoot)) {
+        return null;
+      }
+      const indexStat = await fs.stat(realResolved);
       if (!indexStat.isFile()) return null;
-      return resolvedIndex;
+      return realResolved;
     } catch {
       return null;
     }
@@ -142,7 +194,15 @@ async function resolveFileInsideRoot(
     return null;
   }
 
-  return currentPath;
+  try {
+    const realFile = await fs.realpath(currentPath);
+    if (!isInsideRoot(realFile, realRoot)) {
+      return null;
+    }
+    return realFile;
+  } catch {
+    return null;
+  }
 }
 
 export async function servePolicyDocument(
@@ -174,7 +234,7 @@ export async function servePolicyDocument(
 
     if (
       !matchedFile &&
-      decodedSegments[0]?.toLowerCase() === 'privacy-policy' &&
+      normalizeSlug(decodedSegments[0] ?? '') === 'privacy-policy' &&
       decodedSegments.length >= 2
     ) {
       matchedFile = await resolveFileInsideRoot(
@@ -207,7 +267,8 @@ export async function servePolicyDocument(
     'Content-Type': contentType,
     'X-Robots-Tag': 'noindex',
     'X-Content-Type-Options': 'nosniff',
-    'Cache-Control': 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400',
+    'Cache-Control':
+      'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400',
   });
 
   if (headOnly) {
