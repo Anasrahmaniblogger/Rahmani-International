@@ -155,36 +155,50 @@ function isSafeScreenshotUrl(url: string): boolean {
 
 function createScreenshotCanvasTexture(
   img: HTMLImageElement,
-  isDark: boolean,
+  isSoftwareGl: boolean,
   maxAnisotropy: number
 ): THREE.CanvasTexture {
+  const texW = isSoftwareGl ? 512 : 1024;
+  const texH = isSoftwareGl ? 1024 : 2048;
   const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 1024;
+  canvas.width = texW;
+  canvas.height = texH;
   const ctx = canvas.getContext('2d');
 
   if (ctx) {
-    ctx.fillStyle = isDark ? '#090d16' : '#f8fafc';
-    ctx.fillRect(0, 0, 512, 1024);
+    // Crisp white Play Store screen surface matching the edited 9:16 screenshots
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, texW, texH);
 
-    const imgW = img.naturalWidth || 512;
-    const imgH = img.naturalHeight || 1024;
-    const scale = Math.max(512 / imgW, 1024 / imgH);
+    const imgW = img.naturalWidth || texW;
+    const imgH = img.naturalHeight || texH;
+
+    // Reserve clean top safe area below the 3D earpiece speaker & subtle bottom gesture bar
+    const topSafe = Math.round(texH * 0.042);
+    const bottomSafe = Math.round(texH * 0.036);
+    const availW = texW;
+    const availH = texH - topSafe - bottomSafe;
+
+    // Fit full width without cropping left/right edges of buttons, icons, or banners
+    const scale = Math.min(availW / imgW, availH / imgH);
     const drawW = imgW * scale;
     const drawH = imgH * scale;
-    const dx = (512 - drawW) / 2;
-    const dy = (1024 - drawH) / 2;
+    const dx = (texW - drawW) / 2;
+    const dy = topSafe + (availH - drawH) * 0.25;
 
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(img, dx, dy, drawW, drawH);
 
-    // Subtle top bezel vignette so the 3D earpiece speaker stays crisp
-    const topVignette = ctx.createLinearGradient(0, 0, 0, 56);
-    topVignette.addColorStop(0, 'rgba(2, 6, 23, 0.34)');
-    topVignette.addColorStop(1, 'rgba(2, 6, 23, 0)');
-    ctx.fillStyle = topVignette;
-    ctx.fillRect(0, 0, 512, 56);
+    // Subtle minimal Android bottom gesture indicator bar
+    const pillW = Math.round(texW * 0.32);
+    const pillH = Math.max(6, Math.round(texH * 0.0055));
+    const pillX = Math.round((texW - pillW) / 2);
+    const pillY = texH - Math.round(bottomSafe * 0.58);
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.28)';
+    ctx.beginPath();
+    ctx.roundRect(pillX, pillY, pillW, pillH, pillH / 2);
+    ctx.fill();
   }
 
   const texture = new THREE.CanvasTexture(canvas);
@@ -260,14 +274,21 @@ function createContactShadowTexture(): THREE.CanvasTexture {
 export function HeroThreeScene() {
   const { theme } = useTheme();
   const mountRef = useRef<HTMLDivElement | null>(null);
-  const [activeAppIdx, setActiveAppIdx] = useState(0);
+  const [activeAppIdx, setActiveAppIdx] = useState(() => {
+    const firstShotIdx = APPS_PORTFOLIO.findIndex((a) =>
+      Boolean(a.screenshot?.trim())
+    );
+    return firstShotIdx >= 0 ? firstShotIdx : 0;
+  });
   const [exploded, setExploded] = useState(false);
   const [dockOpen, setDockOpen] = useState(true);
   const [webglUnavailable, setWebglUnavailable] = useState(false);
 
+  const manualPauseUntilRef = useRef(0);
+
   const stateRef = useRef({
     exploded: false,
-    appIdx: 0,
+    appIdx: activeAppIdx,
     isDark: theme === 'dark',
     resetCamera: false,
   });
@@ -283,6 +304,31 @@ export function HeroThreeScene() {
   useEffect(() => {
     stateRef.current.isDark = theme === 'dark';
   }, [theme]);
+
+  // Smoothly auto-cycle across apps that have real screenshots so all 3 edited
+  // Play Store previews rotate automatically inside the 3D phone
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    if (reduceMotion) return;
+
+    const showcaseIndices = APPS_PORTFOLIO.map((app, idx) =>
+      app.screenshot?.trim() ? idx : -1
+    ).filter((idx) => idx >= 0);
+
+    if (showcaseIndices.length <= 1) return;
+
+    const timer = window.setInterval(() => {
+      if (Date.now() < manualPauseUntilRef.current) return;
+      setActiveAppIdx((prev) => {
+        const pos = showcaseIndices.indexOf(prev);
+        return showcaseIndices[(pos + 1) % showcaseIndices.length];
+      });
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const container = mountRef.current;
@@ -686,6 +732,37 @@ export function HeroThreeScene() {
     let frameId = 0;
     let disposed = false;
     let textureRequestId = 0;
+    const loadedImageCache = new Map<string, HTMLImageElement>();
+
+    // Preload configured local/remote app screenshots so cycling is instant
+    APPS_PORTFOLIO.forEach((app) => {
+      const url = app.screenshot?.trim() ?? '';
+      if (!isSafeScreenshotUrl(url) || loadedImageCache.has(url)) return;
+      const preloadImg = new window.Image();
+      if (/^https:\/\//i.test(url)) {
+        preloadImg.crossOrigin = 'anonymous';
+      }
+      preloadImg.referrerPolicy = 'no-referrer';
+      preloadImg.onload = () => {
+        if (disposed) return;
+        loadedImageCache.set(url, preloadImg);
+        const activeUrl =
+          APPS_PORTFOLIO[stateRef.current.appIdx]?.screenshot?.trim() ?? '';
+        if (activeUrl === url) {
+          try {
+            const shotTex = createScreenshotCanvasTexture(
+              preloadImg,
+              isSoftwareGl,
+              maxAniso
+            );
+            swapScreenTexture(shotTex, 0.14);
+          } catch {
+            // Keep procedural fallback
+          }
+        }
+      };
+      preloadImg.src = url;
+    });
 
     function swapScreenTexture(
       nextTex: THREE.CanvasTexture,
@@ -701,11 +778,29 @@ export function HeroThreeScene() {
 
     function updateAppScreen(appIndex: number, isDark: boolean) {
       const reqId = ++textureRequestId;
+      const app = APPS_PORTFOLIO[appIndex] ?? APPS_PORTFOLIO[0];
+      const screenshotUrl = app?.screenshot?.trim() ?? '';
+
+      if (isSafeScreenshotUrl(screenshotUrl)) {
+        const cachedImg = loadedImageCache.get(screenshotUrl);
+        if (cachedImg) {
+          try {
+            const shotTex = createScreenshotCanvasTexture(
+              cachedImg,
+              isSoftwareGl,
+              maxAniso
+            );
+            swapScreenTexture(shotTex, 0.14);
+            return;
+          } catch {
+            // Fall through to procedural fallback
+          }
+        }
+      }
+
       const fallbackTex = createScreenCanvasTexture(appIndex, isDark, maxAniso);
       swapScreenTexture(fallbackTex, 0.28);
 
-      const app = APPS_PORTFOLIO[appIndex] ?? APPS_PORTFOLIO[0];
-      const screenshotUrl = app?.screenshot?.trim() ?? '';
       if (!isSafeScreenshotUrl(screenshotUrl)) {
         return;
       }
@@ -716,10 +811,16 @@ export function HeroThreeScene() {
       }
       img.referrerPolicy = 'no-referrer';
       img.onload = () => {
-        if (disposed || reqId !== textureRequestId) return;
+        if (disposed) return;
+        loadedImageCache.set(screenshotUrl, img);
+        if (reqId !== textureRequestId) return;
         try {
-          const shotTex = createScreenshotCanvasTexture(img, isDark, maxAniso);
-          swapScreenTexture(shotTex, 0.16);
+          const shotTex = createScreenshotCanvasTexture(
+            img,
+            isSoftwareGl,
+            maxAniso
+          );
+          swapScreenTexture(shotTex, 0.14);
         } catch {
           // Keep procedural app preview if canvas readback fails
         }
@@ -922,9 +1023,10 @@ export function HeroThreeScene() {
           <div className="flex flex-wrap items-center justify-center gap-1.5 rounded-xl border border-slate-300/80 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 p-1.5 shadow-sm">
             <button
               type="button"
-              onClick={() =>
-                setActiveAppIdx((prev) => (prev + 1) % APPS_PORTFOLIO.length)
-              }
+              onClick={() => {
+                manualPauseUntilRef.current = Date.now() + 12000;
+                setActiveAppIdx((prev) => (prev + 1) % APPS_PORTFOLIO.length);
+              }}
               className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 transition-colors whitespace-nowrap shrink-0"
             >
               <Smartphone className="h-3.5 w-3.5" aria-hidden="true" />
