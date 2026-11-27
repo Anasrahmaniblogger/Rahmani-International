@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8fafd">
+  <meta name="description" content="Terms of Service for SwarX Music by Rahmani International. Read the terms governing app use, Google Play Billing, purchases, music playback, intellectual property and support.">
+  <title>Terms of Service | SwarX Music — Rahmani International</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --page: #f8fafd;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --heading: #0f172a;
+      --text: #334155;
+      --muted: #64748b;
+      --accent: #1a56db;
+      --accent-soft: #eff6ff;
+      --notice: #f8fafc;
+      --shadow: 0 8px 28px rgba(15, 23, 42, .04);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page: #060a14;
+        --surface: #0f172a;
+        --border: #1e293b;
+        --heading: #f1f5f9;
+        --text: #cbd5e1;
+        --muted: #94a3b8;
+        --accent: #60a5fa;
+        --accent-soft: #101f38;
+        --notice: #111c2e;
+        --shadow: 0 8px 28px rgba(0, 0, 0, .18);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      padding: 28px 16px;
+      background: var(--page);
+      color: var(--text);
+      font-family: "Plus Jakarta Sans", "Manrope", system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-text-size-adjust: 100%;
+    }
+    .wrap { width: 100%; max-width: 780px; margin: 0 auto; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 36px 28px;
+      margin-bottom: 18px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    h1 {
+      color: var(--heading);
+      font-size: clamp(28px, 5vw, 38px);
+      line-height: 1.18;
+      letter-spacing: -.035em;
+      margin: 0 0 14px;
+    }
+    h2 {
+      color: var(--heading);
+      font-size: 20px;
+      line-height: 1.35;
+      margin: 0 0 13px;
+      letter-spacing: -.015em;
+    }
+    h3 { color: var(--heading); font-size: 16px; margin: 18px 0 8px; }
+    p { margin: 0 0 13px; }
+    p:last-child { margin-bottom: 0; }
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      overflow-wrap: anywhere;
+    }
+    a:hover { text-decoration-thickness: 2px; }
+    ul, ol { padding-left: 22px; margin: 8px 0 14px; }
+    li { padding-left: 3px; margin: 5px 0; }
+    .summary { font-size: 16px; max-width: 65ch; }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 22px 0 14px;
+    }
+    .meta-item {
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 12px 14px;
+      background: var(--notice);
+    }
+    .meta-label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .meta-value { color: var(--heading); font-weight: 650; overflow-wrap: anywhere; }
+    .updated { color: var(--muted); font-size: 13px; margin-top: 15px; }
+    .notice {
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 10px;
+      padding: 14px 16px;
+      background: var(--accent-soft);
+      font-size: 14px;
+    }
+    .section {
+      padding: 25px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:first-child { padding-top: 0; }
+    .section:last-child { border-bottom: 0; padding-bottom: 0; }
+    .small { font-size: 14px; color: var(--muted); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .contact-box {
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: var(--notice);
+    }
+    .contact-box strong { display: block; color: var(--heading); margin-bottom: 5px; }
+    .footer {
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      padding: 10px 8px 20px;
+    }
+    .footer a { color: var(--muted); }
+    @media (max-width: 650px) {
+      body { padding: 14px 12px; }
+      .card { padding: 24px 18px; border-radius: 14px; }
+      .meta, .contact-grid { grid-template-columns: 1fr; }
+      .section { padding: 22px 0; }
+    }
+    @media print {
+      :root { color-scheme: light; --page: #fff; --surface: #fff; --text: #222; --heading: #111; --muted: #555; --border: #ddd; }
+      body { padding: 0; background: #fff; font-size: 11pt; }
+      .card { box-shadow: none; break-inside: avoid; }
+      a { color: #111; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="card">
+      <p class="eyebrow">Rahmani International · Legal</p>
+      <h1>Terms of Service</h1>
+      <p class="summary">
+        These Terms explain the rules for installing, accessing and using
+        <strong>SwarX</strong>, our music player application. Please read them
+        carefully before using the app or purchasing any digital feature.
+      </p>
+      <div class="meta" aria-label="App and publisher details">
+        <div class="meta-item"><span class="meta-label">App Name</span><span class="meta-value">SwarX</span></div>
+        <div class="meta-item"><span class="meta-label">Developer</span><span class="meta-value">Rahmani International</span></div>
+        <div class="meta-item"><span class="meta-label">Package ID</span><span class="meta-value">com.musicxanas</span></div>
+        <div class="meta-item"><span class="meta-label">Contact Email</span><span class="meta-value"><a href="mailto:info@rahmaniinternational.in">info@rahmaniinternational.in</a></span></div>
+      </div>
+      <p class="updated"><strong>Last Updated:</strong> 27 November 2026</p>
+      <div class="notice">
+        <strong>Important billing notice:</strong> SwarX may offer optional digital
+        products or premium features through Google Play Billing. The price,
+        billing period, renewal terms (if any), and purchase details shown in
+        Google Play at checkout apply to that specific offer. Not every feature
+        is paid, and availability may change.
+      </div>
+    </header>
+
+    <article class="card">
+      <section class="section">
+        <h2>1. Acceptance of These Terms</h2>
+        <p>
+          These Terms of Service (“Terms”) govern your use of the SwarX mobile
+          application (“SwarX”, “App”, “we”, “our” or “us”), published by Rahmani
+          International. By installing, opening, accessing or using the App, you
+          agree to these Terms and to our applicable Privacy Policy.
+        </p>
+        <p>
+          If you do not agree, please stop using the App and uninstall it.
+          Additional terms may apply to a particular purchase, feature or
+          third-party service. If those terms conflict with these Terms for that
+          specific service, the more specific terms will apply to that service.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>2. About SwarX and Its Features</h2>
+        <p>
+          SwarX is a music player designed to help you enjoy and organize audio
+          available on your device. Depending on your App version, device,
+          operating system and permissions, features may include:
+        </p>
+        <ul>
+          <li>Playing music files stored on your phone or supported storage.</li>
+          <li>Offline playback of compatible local audio files.</li>
+          <li>Music library browsing and organization.</li>
+          <li>Creating, editing and managing playlists.</li>
+          <li>Searching songs, artists, albums or folders.</li>
+          <li>Equalizer, bass boost and audio-effect controls, where supported.</li>
+          <li>Background playback and notification or lock-screen controls.</li>
+          <li>Sleep timer, repeat, shuffle and gapless playback, where available.</li>
+          <li>Home-screen widgets and other interface features, where supported.</li>
+        </ul>
+        <p>
+          Features may vary between releases and devices. We may add, modify,
+          suspend or discontinue features to improve the App, maintain
+          compatibility, comply with law or address security and technical
+          requirements.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>3. Eligibility and Responsible Use</h2>
+        <p>
+          You may use SwarX only in a manner permitted by applicable law and
+          these Terms. If you are under the age required to enter a binding
+          agreement in your location, use the App with permission and
+          supervision of a parent or legal guardian where required.
+        </p>
+        <p>You agree not to:</p>
+        <ul>
+          <li>Use the App for unlawful, fraudulent or harmful purposes.</li>
+          <li>Attempt to bypass, disable or interfere with security features.</li>
+          <li>Reverse engineer, decompile or modify the App except where applicable law expressly permits it.</li>
+          <li>Distribute malware, exploit vulnerabilities or disrupt the App or its services.</li>
+          <li>Use the App to infringe another person’s copyright, privacy or other rights.</li>
+          <li>Misrepresent your identity or misuse support channels.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>4. Device Files, Permissions and Offline Playback</h2>
+        <p>
+          Some SwarX features require permission to access audio or media files
+          on your device. You control these permissions through your Android
+          settings. If you deny or revoke a permission, the related feature may
+          not work or may show an incomplete music library.
+        </p>
+        <p>
+          SwarX generally plays compatible files that are available to your
+          device. We do not promise that every audio format, file, storage
+          location or device will be supported. Playback may be affected by
+          corrupted files, DRM restrictions, device limitations, operating
+          system changes or unavailable storage.
+        </p>
+        <p>
+          Offline playback means that supported local files can be played
+          without an active internet connection. Certain optional services,
+          purchase verification, updates or online features may still require
+          connectivity.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>5. Music, Copyright and Intellectual Property</h2>
+        <p>
+          The App’s name, branding, design, software, interface, graphics and
+          original materials are owned by or licensed to Rahmani International
+          and are protected by applicable intellectual-property laws.
+          These Terms grant you a limited, personal, non-exclusive,
+          non-transferable and revocable licence to use the App for lawful
+          personal purposes, subject to these Terms and Google Play’s rules.
+        </p>
+        <p>
+          You retain responsibility for music and other files that you obtain,
+          store, import or play. You must have the necessary rights or
+          permissions to use those files. SwarX does not grant you ownership
+          of songs, recordings, artwork or other third-party content merely
+          because the App can play or display them.
+        </p>
+        <p>
+          You may not copy, sell, publicly distribute, make available,
+          commercially exploit or otherwise use copyrighted content in a way
+          that violates the rights of its owner. Do not use the App to
+          facilitate unauthorized copying or distribution.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>6. Google Play Billing and Digital Purchases</h2>
+        <p>
+          SwarX may offer in-app products, upgrades, premium functionality or
+          other digital benefits through Google Play Billing. Any such offer
+          will be presented in the App or Google Play purchase interface.
+          A purchase is optional unless a particular feature clearly states
+          otherwise.
+        </p>
+        <ul>
+          <li><strong>Checkout and price:</strong> Review the product description, displayed price, currency, taxes (if shown), billing period and purchase confirmation before authorizing payment.</li>
+          <li><strong>Payment processing:</strong> Google Play processes eligible purchases using the payment method and account associated with your Google Play account. We do not receive or store your complete payment-card details through the App.</li>
+          <li><strong>Purchase confirmation:</strong> A purchase is subject to successful processing and verification by Google Play. Keep your Google Play order or transaction receipt for support.</li>
+          <li><strong>Access to purchased benefits:</strong> Digital benefits may be linked to your Google Play account, App installation or supported device. Use the account that made the purchase when restoring or checking eligible purchases.</li>
+          <li><strong>Availability:</strong> Products and prices may differ by country, account, promotion or time. An offer may be withdrawn or changed for future purchases.</li>
+          <li><strong>No transfer:</strong> Unless the purchase screen or applicable law says otherwise, digital benefits are for your personal use and may not be resold, transferred or shared commercially.</li>
+        </ul>
+        <p>
+          We do not claim that SwarX currently earns revenue or that any
+          particular paid product is available to every user. The purchase
+          screen is the authoritative description of the offer you are buying.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>7. Subscriptions, Renewals and Cancellation</h2>
+        <p>
+          If SwarX offers a subscription, its checkout screen will identify
+          the subscription price, duration, renewal frequency and any trial
+          or introductory offer before you confirm. These terms apply only
+          when a subscription is actually presented and purchased.
+        </p>
+        <ul>
+          <li>Subscriptions may automatically renew unless cancelled in accordance with the Google Play subscription settings and the offer terms.</li>
+          <li>To cancel or manage a subscription, use the Google Play account and subscription controls associated with the purchase.</li>
+          <li>Uninstalling SwarX does not, by itself, cancel a subscription.</li>
+          <li>Cancellation generally prevents a future renewal; access may continue until the end of the already-paid period, subject to the displayed offer and applicable law.</li>
+          <li>Free trials or introductory prices, if offered, may convert to a paid subscription according to the terms shown at sign-up.</li>
+        </ul>
+        <p>
+          If the App does not display a subscription offer, this section does
+          not create or imply a subscription.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>8. Refunds, Billing Issues and Consumer Rights</h2>
+        <p>
+          Payments made through Google Play are subject to Google Play’s
+          purchase, cancellation and refund processes, together with
+          applicable consumer-protection law. Refund eligibility and the
+          process may depend on the product, timing, country and reason
+          for the request.
+        </p>
+        <p>
+          For a billing problem, duplicate charge, unrecognized transaction
+          or refund request, first review your Google Play order history and
+          the relevant Google Play help or refund process. You may also
+          contact us with the order reference and a description of the issue.
+          Please do not send full card numbers, passwords or other sensitive
+          payment credentials.
+        </p>
+        <p>
+          Nothing in these Terms excludes or limits a refund, remedy,
+          warranty or consumer right that cannot lawfully be excluded
+          under the laws applicable to you.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>9. Updates, Compatibility and Availability</h2>
+        <p>
+          We may release updates, bug fixes, security improvements or
+          feature changes through Google Play. Some updates may be needed
+          for continued operation, compatibility or security. Your device
+          may download or install updates according to its Google Play
+          settings.
+        </p>
+        <p>
+          We aim to keep SwarX useful and reliable, but we cannot guarantee
+          uninterrupted, error-free or universally compatible operation.
+          The App may be temporarily unavailable due to maintenance,
+          network conditions, device issues, third-party services or
+          circumstances outside our reasonable control.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>10. Third-Party Services and Google Play</h2>
+        <p>
+          SwarX is distributed through Google Play and may rely on Android
+          system components or other third-party services for functions
+          such as billing, installation, updates or device integration.
+          Those services may be governed by their own terms and privacy
+          policies.
+        </p>
+        <p>
+          Rahmani International does not control third-party services and
+          is not responsible for their independent availability, policies
+          or actions. This does not affect rights you may have against a
+          third-party provider under its own terms or applicable law.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>11. Privacy and Data</h2>
+        <p>
+          Your use of SwarX is also covered by our Privacy Policy, which
+          explains the app’s data practices and any applicable permissions.
+          Please review it before using the App:
+          <a href="https://anasrahmaniblogger.github.io/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+        </p>
+        <p>
+          The Google Play listing currently contains the developer’s data
+          safety declaration. Data practices can change as the App is
+          updated, so consult the current Play Store Data safety section
+          and Privacy Policy for the latest information. Device permissions
+          are managed by Android.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>12. Disclaimer of Warranties</h2>
+        <p>
+          To the maximum extent permitted by applicable law, SwarX is
+          provided “as is” and “as available,” without warranties that
+          cannot legally be excluded. We do not guarantee that the App
+          will meet every preference, support every file or device, or
+          operate without interruptions or defects.
+        </p>
+        <p>
+          We may make reasonable efforts to correct reported issues,
+          but we are not obligated to provide a particular feature,
+          compatibility level or update schedule unless required by law
+          or expressly promised in a separate written agreement.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>13. Limitation of Liability</h2>
+        <p>
+          To the extent permitted by law, Rahmani International will not
+          be liable for indirect, incidental, special, consequential or
+          punitive losses, loss of profits, loss of data, or interruption
+          of use arising from your use of or inability to use SwarX.
+        </p>
+        <p>
+          Nothing in these Terms limits liability that applicable law
+          prohibits from being limited, including any mandatory consumer
+          rights. Where liability may legally be limited, our total
+          liability for claims relating to the App will be limited to
+          the amount you paid directly for the relevant App product
+          during the period allowed by applicable law, or the legally
+          required minimum remedy if that limitation is not permitted.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>14. Suspension and Termination</h2>
+        <p>
+          You may stop using SwarX at any time by uninstalling it.
+          We may restrict or discontinue access to a feature, or take
+          reasonable action against misuse, where necessary to protect
+          users, maintain security, comply with law, enforce these Terms
+          or respond to technical or operational concerns.
+        </p>
+        <p>
+          Termination does not remove obligations or rights that by
+          their nature continue, including intellectual-property
+          provisions, disclaimers, liability limitations and
+          outstanding lawful payment obligations.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>15. Changes to These Terms</h2>
+        <p>
+          We may revise these Terms from time to time to reflect
+          updates to SwarX, billing features, legal requirements or
+          business practices. The revised version will be published
+          at this page with an updated “Last Updated” date.
+        </p>
+        <p>
+          Where required by law, we will provide additional notice
+          or obtain consent for material changes. Your continued use
+          of the App after revised Terms take effect indicates
+          acceptance to the extent permitted by law.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>16. Governing Law and Disputes</h2>
+        <p>
+          These Terms are governed by the laws applicable to the
+          developer’s place of operation, subject to mandatory
+          consumer-protection rules in your country or region.
+          Any dispute will be handled by a competent court or
+          dispute-resolution authority as required by applicable law.
+        </p>
+        <p>
+          If any provision is found unenforceable, the remaining
+          provisions will continue to apply to the extent legally
+          possible. A failure to enforce a provision is not a
+          permanent waiver of that provision.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>17. Contact and Support</h2>
+        <p>
+          If you have questions about these Terms, app functionality,
+          purchase access or a technical issue, contact the developer.
+          For billing disputes, include only the order information
+          needed to identify the transaction.
+        </p>
+        <div class="contact-grid">
+          <div class="contact-box">
+            <strong>Developer</strong>
+            Rahmani International
+          </div>
+          <div class="contact-box">
+            <strong>Support Email</strong>
+            <a href="mailto:info@rahmaniinternational.in">info@rahmaniinternational.in</a>
+          </div>
+          <div class="contact-box">
+            <strong>Official Website</strong>
+            <a href="https://rahmaniinternational.in/" target="_blank" rel="noopener noreferrer">rahmaniinternational.in</a>
+          </div>
+          <div class="contact-box">
+            <strong>Google Play Listing</strong>
+            <a href="https://play.google.com/store/apps/details?id=com.musicxanas" target="_blank" rel="noopener noreferrer">View SwarX on Google Play</a>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <footer class="footer">
+      © 2026 Rahmani International · SwarX
+    </footer>
+  </main>
+</body>
+</html>
